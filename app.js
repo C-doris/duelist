@@ -93,8 +93,14 @@ function getAllAssignments() {
 }
 
 // Date helpers
+
+function parseLocalDate(dateStr) {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
 function isOverdue(dateStr) {
-  const due = new Date(dateStr);
+  const due = parseLocalDate(dateStr);
   const today = new Date();
   due.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
@@ -102,7 +108,7 @@ function isOverdue(dateStr) {
 }
 
 function formatDate(dateStr) {
-  const due = new Date(dateStr);
+  const due = parseLocalDate(dateStr);
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -331,5 +337,6 @@ async function init() {
     }
   });
 }
+
 
 init();
