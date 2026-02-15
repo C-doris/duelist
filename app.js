@@ -108,23 +108,25 @@ function isOverdue(dateStr) {
 }
 
 function formatDate(dateStr) {
-  const due = parseLocalDate(dateStr);
+  const due = new Date(dateStr);
+  if (isNaN(due)) return 'Invalid Date';
+
+  const now = new Date();
+
   const today = new Date();
+  today.setHours(0,0,0,0);
+
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
-  
-  due.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
-  tomorrow.setHours(0, 0, 0, 0);
-  
-  if (due.getTime() === today.getTime()) return 'Today';
-  if (due.getTime() === tomorrow.getTime()) return 'Tomorrow';
-  
-  return due.toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric',
-    year: due.getFullYear() !== today.getFullYear() ? 'numeric' : undefined
-  });
+
+  const dueDateOnly = new Date(due);
+  dueDateOnly.setHours(0,0,0,0);
+
+  if (dueDateOnly.getTime() === today.getTime()) {
+  return 'Today, ' + due.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+}
+  if (dueDateOnly.getTime() === tomorrow.getTime()) {
+  return 'Tomorrow, ' + due.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 }
 
 // Toast notification
@@ -340,3 +342,4 @@ async function init() {
 
 
 init();
+
