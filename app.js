@@ -128,6 +128,14 @@ function formatDate(dateStr) {
   if (dueDateOnly.getTime() === tomorrow.getTime()) {
   return 'Tomorrow, ' + due.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 }
+  return due.toLocaleString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit'
+});
+}
+
 
 // Toast notification
 function showToast(message, type = 'default') {
@@ -342,5 +350,6 @@ async function init() {
 
 
 init();
+
 
 
