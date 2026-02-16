@@ -100,11 +100,8 @@ function parseLocalDate(dateStr) {
 }
 
 function isOverdue(dateStr) {
-  const due = parseLocalDate(dateStr);
-  const today = new Date();
-  due.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
-  return due < today;
+  const due = new Date(dateStr);
+  return due < new Date();
 }
 
 function formatDate(dateStr) {
@@ -350,6 +347,7 @@ async function init() {
 
 
 init();
+
 
 
 
