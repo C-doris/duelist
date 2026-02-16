@@ -1,4 +1,4 @@
-const CACHE_NAME = 'assignment-tracker-v4';
+const CACHE_NAME = 'assignment-tracker-v5';
 const FILES = [
   './',
   './index.html',
@@ -32,5 +32,6 @@ self.addEventListener('fetch', (e) => {
   );
 
 });
+
 
 
